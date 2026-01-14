@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm install -g @railway/cli
-      - run: railway up --service=cicd_nest
+      - run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
       - run: echo "🚝 레일웨이 배포 완료! 🚝"
