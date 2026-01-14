@@ -1,0 +1,14 @@
+node_modules
+dist
+build
+coverage
+npm-debug.log*
+yarn-error.log*
+.env
+.env.*
+.vscode
+.idea
+.git
+.gitignore
+test
+jest.config.*
