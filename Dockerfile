@@ -1,25 +1,22 @@
-FROM node:22-alpine AS builder
+FROM node:22-alpine
 
+# APP 폴더를 만들어서 들어감.
 WORKDIR /app
 
-# 의존성 설치를 캐시하기 위해 package-lock 포함
-COPY package.json package-lock.json ./
-RUN npm ci
+# 패키지 파일을 복사해서 설치
+COPY package.json ./
 
-# 전체 소스 복사 후 빌드
+# 패키지 설치
+RUN npm install
+
+# 파일을 복사해서 빌드
 COPY . .
+
+# 빌드 명령어
 RUN npm run build
 
-# 실행 전용 경량 이미지
-FROM node:22-alpine AS runner
-WORKDIR /app
+# 3000 포트를 사용
+EXPOSE 3000 
 
-# 실행에 필요한 파일만 복사
-COPY package.json package-lock.json ./
-RUN npm ci --omit=dev
-
-COPY --from=builder /app/dist ./dist
-
-EXPOSE 3000
-
-CMD ["node", "dist/main.js"]
+# 실행 명령어
+CMD [ "npm", "start" ]

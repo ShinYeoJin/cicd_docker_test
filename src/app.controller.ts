@@ -10,7 +10,6 @@ export class AppController {
     return 'Hello World';
   }
 
-
   @Get('/hello/docker')
   getHelloDocker(): string {
     return 'Hello Docker';
